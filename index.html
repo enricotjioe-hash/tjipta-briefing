@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tjipta Group · Morning Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F3EF;
+  --surface:#FFFFFF;
+  --ink:#1A1917;
+  --ink-2:#4A4845;
+  --ink-3:#8C8884;
+  --ink-4:#B8B5B0;
+  --border:#E5E2DD;
+  --border-light:#EEEBE6;
+  /* Alert colours — warm, not harsh */
+  --high:#B84400;
+  --high-bg:#FFF3EE;
+  --high-pill-bg:#FFE4D6;
+  --high-border:#F4875A;
+  --med:#9A6A00;
+  --med-bg:#FFFAED;
+  --med-pill-bg:#FDEFC2;
+  --med-border:#E8C650;
+  --watch:#566070;
+  --watch-bg:#F6F7F9;
+  --watch-pill-bg:#E8ECF0;
+  --watch-border:#C5CDD8;
+  --blue:#1D5FA6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;min-height:100vh;font-size:16px;-webkit-font-smoothing:antialiased}
+
+/* ── MASTHEAD ── */
+.masthead{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.masthead-top{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;gap:20px}
+.brand-name{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
+.brand-sub{font-size:11.5px;color:var(--ink-3);font-weight:400;margin-top:2px;letter-spacing:.2px}
+.masthead-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.masthead-date{font-size:13px;color:var(--ink-2);font-weight:400}
+.masthead-edition{font-size:11px;color:var(--ink-3);letter-spacing:.3px}
+
+/* ── PRICE TICKER ── */
+.ticker{display:flex;overflow-x:auto;border-top:1px solid var(--border-light);background:#FAFAF8}
+.ticker::-webkit-scrollbar{display:none}
+.tick{display:flex;align-items:center;gap:7px;padding:7px 18px;border-right:1px solid var(--border-light);font-size:12px;flex-shrink:0;white-space:nowrap}
+.tick-label{color:var(--ink-4);font-size:10.5px;letter-spacing:.3px;font-weight:500;text-transform:uppercase}
+.tick-val{color:var(--ink);font-weight:600}
+.tick-up{color:#2E7D52;font-size:10px}
+.tick-down{color:#B84400;font-size:10px}
+.tick-flat{color:var(--ink-4);font-size:10px}
+.tick-live{font-size:10px;color:#2E7D52;font-weight:500}
+.tick-ind{font-size:10px;color:var(--ink-4)}
+.tick-link{color:var(--ink);font-weight:600;text-decoration:none}
+.tick-link:hover{color:var(--blue)}
+
+/* ── NEW BADGE ── */
+.card-new{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;background:#1D5FA6;color:#fff;padding:2px 6px;border-radius:3px;margin-left:2px;vertical-align:middle}
+
+/* ── EDITORS BRIEF ── */
+.editors-brief{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;gap:20px;align-items:flex-start}
+.brief-eyebrow{font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-3);flex-shrink:0;padding-top:2px;padding-right:20px;border-right:1px solid var(--border);margin-right:0;white-space:nowrap}
+.brief-text{font-size:14.5px;line-height:1.65;color:var(--ink-2);padding-left:20px}
+.brief-text strong{color:var(--ink);font-weight:600}
+
+/* ── CATEGORY NAV ── */
+.cat-nav{background:var(--surface);border-bottom:2px solid var(--border);display:flex;align-items:stretch;overflow-x:auto;padding:0 40px}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-btn{padding:12px 0;margin-right:28px;background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.cat-btn:hover{color:var(--ink-2)}
+.cat-btn.on{color:var(--ink);font-weight:600;border-bottom-color:var(--ink)}
+.cat-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 4px;background:#ECEAE6;border-radius:9px;font-size:10.5px;font-weight:600;color:var(--ink-3)}
+.cat-count.has-high{background:var(--high-pill-bg);color:var(--high)}
+/* ── PAGE LAYOUT ── */
+.page-wrap{display:flex;max-width:1400px;margin:0 auto;min-height:calc(100vh - 280px);gap:0}
+
+/* ── COMMODITY SIDEBAR ── */
+.comm-sidebar{width:300px;flex-shrink:0;border-left:1px solid var(--border);background:var(--bg);padding:16px}
+.csb-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.csb-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
+.csb-title{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3)}
+.csb-see-all{font-size:11px;color:var(--blue);cursor:pointer;font-weight:500;border:none;background:none;padding:0}
+.csb-see-all:hover{text-decoration:underline}
+.csb-section{border-bottom:1px solid var(--border-light)}
+.csb-section-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-3);padding:10px 16px 5px;background:#FAFAF8}
+.csb-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 16px;border-bottom:1px solid var(--border-light);gap:8px}
+.csb-row:last-child{border-bottom:none}
+.csb-label{font-size:12px;color:var(--ink-2);flex:1}
+.csb-sub{font-size:10px;color:var(--ink-4);display:block}
+.csb-val{font-size:12px;font-weight:600;color:var(--ink);flex-shrink:0;text-align:right}
+.csb-badge{display:inline-block;font-size:9px;font-weight:600;padding:1px 5px;border-radius:8px;margin-left:4px}
+.csb-live{background:#E6F4EC;color:#2E7D52}
+.csb-monthly{background:#FFF3E0;color:#9A6A00}
+.csb-annual{background:#ECEAE6;color:var(--ink-3)}
+
+/* ── FEED ── */
+.feed-col{flex:1;min-width:0;padding:0 0 60px}
+.feed-meta{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-light)}
+.feed-label{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3)}
+.feed-count{font-size:12px;color:var(--ink-4)}
+#feed{padding:20px 32px;display:flex;flex-direction:column;gap:12px}
+
+/* ── STORY CARDS ── */
+.story-card{background:var(--surface);border:1px solid var(--border);border-left:3.5px solid var(--border);border-radius:4px;padding:18px 20px;cursor:pointer;transition:box-shadow .15s,border-color .15s;display:flex;gap:16px;align-items:flex-start}
+.story-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.07);border-color:var(--ink-3)}
+.story-card.card-read{opacity:.55;background:#f0ede8}
+.card-main{flex:1;min-width:0}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.urgency-pill{font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:10px}
+.pill-high{background:var(--high-pill-bg);color:var(--high)}
+.pill-med{background:var(--med-pill-bg);color:var(--med)}
+.pill-watch{background:var(--watch-pill-bg);color:var(--watch)}
+.card-cat{font-size:11px;color:var(--ink-3);font-weight:500}
+.card-sep{color:var(--ink-4);font-size:10px}
+.card-headline{font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);line-height:1.45;margin-bottom:6px}
+.card-summary{font-size:14px;color:var(--ink-2);line-height:1.55;font-weight:400}
+.card-arrow{color:var(--ink-4);font-size:16px;flex-shrink:0;padding-top:18px;transition:color .15s}
+.story-card:hover .card-arrow{color:var(--ink-2)}
+.empty-state{padding:60px 32px;text-align:center;color:var(--ink-4);font-size:14px}
+
+
+/* ── DETAIL PAGE ── */
+.detail-page{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:100;overflow-y:auto}
+.detail-page.open{display:block}
+.detail-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.detail-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;padding:7px 14px;border:1px solid var(--border);border-radius:4px;background:var(--surface);transition:all .15s}
+.detail-back:hover{background:var(--bg);color:var(--ink)}
+.detail-back-arrow{font-size:14px}
+.detail-brand{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink)}
+.detail-content{max-width:760px;margin:0 auto;padding:44px 40px 80px}
+
+/* Detail typography */
+.d-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.d-urgency-pill{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border-radius:10px}
+.d-pill-high{background:var(--high-pill-bg);color:var(--high)}
+.d-pill-med{background:var(--med-pill-bg);color:var(--med)}
+.d-pill-watch{background:var(--watch-pill-bg);color:var(--watch)}
+.d-cat{font-size:12px;color:var(--ink-3);font-weight:500}
+.d-date{font-size:12px;color:var(--ink-4)}
+.d-divider{color:var(--ink-4)}
+.d-headline{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);line-height:1.32;margin-bottom:24px;letter-spacing:-.2px}
+.d-rule{width:48px;height:2px;background:var(--ink);margin-bottom:28px}
+
+.d-section-label{font-size:10.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;margin-top:32px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
+.d-explanation{font-size:16px;line-height:1.78;color:var(--ink-2)}
+.d-explanation p{margin-bottom:16px}
+.d-explanation p:last-child{margin-bottom:0}
+
+.d-severity-row{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px 20px;margin-top:4px}
+.d-score{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;line-height:1;flex-shrink:0;min-width:64px}
+.d-score.s-high{color:var(--high)}
+.d-score.s-med{color:var(--med)}
+.d-score.s-watch{color:var(--watch)}
+.d-score-denom{font-size:14px;color:var(--ink-4)}
+.d-score-label{font-size:10.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.d-score-reason{font-size:14px;color:var(--ink-2);line-height:1.6}
+
+.d-company-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.d-company{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:14px 16px}
+.d-company-name{font-size:10.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+.d-company-text{font-size:13px;color:var(--ink-2);line-height:1.6}
+
+.d-action{background:var(--surface);border:1px solid var(--border);border-left:3.5px solid var(--med-border);border-radius:4px;padding:18px 20px;margin-top:4px}
+.d-action-label{font-size:10.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--med);margin-bottom:8px}
+.d-action-text{font-size:14px;color:var(--ink-2);line-height:1.65}
+
+.d-sources{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.d-source-link{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:4px;text-decoration:none;transition:border-color .15s}
+.d-source-link:hover{border-color:var(--ink-2)}
+.d-source-num{font-size:10px;font-weight:700;color:var(--ink-4);flex-shrink:0}
+.d-source-url{font-size:12.5px;color:var(--blue);line-height:1.4;word-break:break-all}
+
+/* ── CARD DATE ── */
+.card-date{font-size:12px;color:var(--ink-3)}
+
+/* ── NAV DIVIDER ── */
+.cat-nav-divider{width:1px;background:var(--border);margin:10px 12px 10px 4px;flex-shrink:0}
+
+/* ── COMMODITY PRICES OVERLAY ── */
+.commodity-page{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:100;overflow-y:auto}
+.commodity-page.open{display:block}
+.comm-content{max-width:900px;margin:0 auto;padding:44px 40px 80px}
+.comm-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.comm-subtitle{font-size:14px;color:var(--ink-3);margin-bottom:40px;line-height:1.6}
+.comm-section{margin-bottom:40px}
+.comm-section-header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:4px 4px 0 0;border-bottom:2px solid var(--ink)}
+.comm-section-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);flex:1}
+.comm-table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;overflow:hidden}
+.comm-table th{font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);background:#FAFAF8}
+.comm-table td{font-size:13px;color:var(--ink-2);padding:11px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+.comm-table tr:last-child td{border-bottom:none}
+.comm-table td:first-child{font-weight:500;color:var(--ink)}
+.comm-val{font-weight:600;color:var(--ink);font-size:14px}
+.freq-live{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#E6F4EC;color:#2E7D52}
+.freq-monthly{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#FFF3E0;color:#9A6A00}
+.freq-annual{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#ECEAE6;color:var(--ink-3)}
+.comm-source-link{color:var(--blue);text-decoration:none;font-size:12px}
+.comm-source-link:hover{text-decoration:underline}
+.comm-note{font-size:12px;color:var(--ink-3);margin-top:8px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-light);border-radius:4px;line-height:1.6}
+.lang-toggle{margin-left:auto;padding:5px 12px;border:1px solid var(--border);border-radius:4px;background:var(--surface);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-3);cursor:pointer;letter-spacing:.5px;transition:all .15s;flex-shrink:0}
+.lang-toggle:hover{color:var(--ink);border-color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<!-- ─── MAIN VIEW ─── -->
+<div id="main-view">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <div>
+        <div class="brand-name">Tjipta Group</div>
+        <div class="brand-sub" data-i18n="brandSub">Morning Intelligence Brief &middot; Indonesia</div>
+      </div>
+      <div class="masthead-right">
+        <div class="masthead-date" id="hdr-date"></div>
+        <div class="masthead-edition">
+          <span id="date-range"></span>
+        </div>
+      </div>
+    </div>
+    <div class="ticker">
+      <div class="tick"><span class="tick-label">USD/IDR</span><span class="tick-val" id="tick-usdidr">—</span><span class="tick-live" data-i18n="tickLiveInd">&nbsp;↻ live</span></div>
+      <div class="tick"><span class="tick-label">Gold</span><a class="tick-link" id="tick-gold" href="https://goldprice.org" target="_blank" rel="noopener">—</a><span class="tick-ind" data-i18n="tickDailyInd">&nbsp;↻ daily</span></div>
+      <div class="tick"><span class="tick-label">Brent Crude</span><a class="tick-link" id="tick-brent" href="https://finance.yahoo.com/quote/BZ%3DF/" target="_blank" rel="noopener">—</a><span class="tick-ind" data-i18n="tickDailyInd">&nbsp;↻ daily</span></div>
+      <div class="tick"><span class="tick-label">Methanol</span><a class="tick-link" id="tick-methanol" href="https://www.methanex.com/our-business/pricing/" target="_blank" rel="noopener">—</a><span class="tick-ind" data-i18n="tickMonthlyInd">&nbsp;↻ monthly</span></div>
+      <div class="tick"><span class="tick-label">BI Rate</span><a class="tick-link" id="tick-birate" href="https://tradingeconomics.com/indonesia/interest-rate" target="_blank" rel="noopener">—</a><span class="tick-ind" data-i18n="tickPerMeetingInd">&nbsp;↻ per meeting</span></div>
+      <div class="tick" style="cursor:pointer" onclick="openCommodities()"><span class="tick-label" style="color:var(--blue)" data-i18n="tickCommodity">Commodity Prices</span><span style="font-size:11px;color:var(--blue);margin-left:4px">→</span></div>
+    </div>
+  </header>
+
+  <div class="editors-brief">
+    <div class="brief-eyebrow" data-i18n="todaySummary">Today's Summary</div>
+    <div class="brief-text" id="brief-text">Loading…</div>
+  </div>
+
+  <nav class="cat-nav">
+    <button class="cat-btn" onclick="setTrending('indonesia')" id="n-Indonesia">🇮🇩 <span data-i18n="indonesiaToday">Indonesia Today</span></button>
+    <button class="cat-btn" onclick="setTrending('global')" id="n-Global">🌐 <span data-i18n="globalToday">Global Today</span></button>
+    <div class="cat-nav-divider"></div>
+    <button class="cat-btn on" onclick="setCat('Paper & Packaging')" id="n-Paper"><span data-i18n="navPaper">Paper &amp; Packaging</span> <span class="cat-count" id="nc-Paper">0</span></button>
+    <button class="cat-btn" onclick="setCat('Wood & Timber')" id="n-Wood"><span data-i18n="navWood">Wood &amp; Timber</span> <span class="cat-count" id="nc-Wood">0</span></button>
+    <button class="cat-btn" onclick="setCat('Indonesia Economy')" id="n-Economy"><span data-i18n="navEconomy">Economy</span> <span class="cat-count" id="nc-Economy">0</span></button>
+    <button class="cat-btn" onclick="setCat('Indonesia Finance & Banking')" id="n-Finance"><span data-i18n="navFinance">Finance &amp; Banking</span> <span class="cat-count" id="nc-Finance">0</span></button>
+    <button class="cat-btn" onclick="setCat('Southeast Asia Trade')" id="n-Trade"><span data-i18n="navTrade">SE Asia Trade</span> <span class="cat-count" id="nc-Trade">0</span></button>
+    <button class="lang-toggle" id="lang-toggle-btn" onclick="toggleLang()">ID</button>
+  </nav>
+
+  <div class="page-wrap">
+    <main class="feed-col">
+      <div class="feed-meta">
+        <div class="feed-label" id="feed-label">Today's Briefing</div>
+        <div class="feed-count" id="feed-count"></div>
+      </div>
+      <div id="feed"></div>
+    </main>
+
+    <aside class="comm-sidebar">
+      <div class="csb-card">
+        <div class="csb-header">
+          <div class="csb-title" data-i18n="sidebarTitle">Commodity Prices</div>
+          <button class="csb-see-all" onclick="openCommodities()" data-i18n="seeAll">See all →</button>
+        </div>
+        <!-- Live Rates -->
+        <div class="csb-section">
+          <div class="csb-section-title"><span data-i18n="sbLiveRates">Live Rates</span> <span class="csb-badge csb-live" data-i18n="badgeDaily">↻ Daily</span></div>
+          <div class="csb-row"><span class="csb-label">USD / IDR</span><span class="csb-val" id="sb-usdidr">—</span></div>
+          <div class="csb-row"><span class="csb-label">Gold (XAU)</span><span class="csb-val" id="sb-gold">—</span></div>
+          <div class="csb-row"><span class="csb-label">Brent Crude</span><span class="csb-val" id="sb-brent">—</span></div>
+          <div class="csb-row"><span class="csb-label" data-i18n="sbBIRate">BI Rate</span><span class="csb-val" id="sb-birate">—</span></div>
+        </div>
+        <!-- Palm Oil -->
+        <div class="csb-section">
+          <div class="csb-section-title"><span data-i18n="sbPalmOil">Palm Oil (CPO)</span> <span class="csb-badge csb-monthly" data-i18n="badgeMonthly">Monthly</span></div>
+          <div class="csb-row"><span class="csb-label">Malaysia BMD<span class="csb-sub">MPOC</span></span><span class="csb-val">~$1,090/t</span></div>
+          <div class="csb-row"><span class="csb-label">Indonesia KEMENDAG<span class="csb-sub">Ministry of Trade</span></span><span class="csb-val">~$1,050/t</span></div>
+          <div class="csb-row"><span class="csb-label">Rotterdam FOB<span class="csb-sub">MPOC</span></span><span class="csb-val">~$1,110/t</span></div>
+        </div>
+        <!-- OCC -->
+        <div class="csb-section">
+          <div class="csb-section-title"><span data-i18n="sbOCC">OCC / Recovered Fibre</span> <span class="csb-badge csb-monthly" data-i18n="badgeMonthly">Monthly</span></div>
+          <div class="csb-row"><span class="csb-label">USA #11 OCC<span class="csb-sub">ISRI</span></span><span class="csb-val">$65–90/st</span></div>
+          <div class="csb-row"><span class="csb-label">China Import OCC<span class="csb-sub">Fastmarkets</span></span><span class="csb-val">$115–130/t</span></div>
+          <div class="csb-row"><span class="csb-label">SE Asia Domestic<span class="csb-sub">Market est.</span></span><span class="csb-val">$120–145/t</span></div>
+        </div>
+        <!-- MDF -->
+        <div class="csb-section">
+          <div class="csb-section-title">MDF <span class="csb-badge csb-annual" data-i18n="badge2025">2025 Survey</span></div>
+          <div class="csb-row"><span class="csb-label">SE Asia Export<span class="csb-sub">Wood Markets</span></span><span class="csb-val">$280–320/m³</span></div>
+          <div class="csb-row"><span class="csb-label">China Domestic<span class="csb-sub">CSIL</span></span><span class="csb-val">$240–275/m³</span></div>
+          <div class="csb-row"><span class="csb-label">Europe<span class="csb-sub">Wood Markets</span></span><span class="csb-val">$370–440/m³</span></div>
+        </div>
+        <!-- Particleboard -->
+        <div class="csb-section">
+          <div class="csb-section-title"><span data-i18n="sbParticle">Particleboard</span> <span class="csb-badge csb-annual" data-i18n="badge2025">2025 Survey</span></div>
+          <div class="csb-row"><span class="csb-label">SE Asia<span class="csb-sub">Wood Markets</span></span><span class="csb-val">$240–280/m³</span></div>
+          <div class="csb-row"><span class="csb-label">China Domestic<span class="csb-sub">CSIL</span></span><span class="csb-val">$195–230/m³</span></div>
+          <div class="csb-row"><span class="csb-label">Europe<span class="csb-sub">Wood Markets</span></span><span class="csb-val">$270–330/m³</span></div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</div><!-- /#main-view -->
+
+<!-- ─── COMMODITY PRICES PAGE ─── -->
+<div class="commodity-page" id="commodity-page">
+  <div class="detail-nav">
+    <button class="detail-back" onclick="closeCommodities()"><span class="detail-back-arrow">←</span> <span data-i18n="backBriefing">Back to Briefing</span></button>
+    <div class="detail-brand" data-i18n="commRefBrand">Commodity Reference Prices</div>
+    <div style="width:140px"></div>
+  </div>
+  <div class="comm-content">
+    <div class="comm-title" data-i18n="commTitle">Commodity Prices</div>
+    <div class="comm-subtitle" data-i18n="commSubtitle">Reference prices by region. Live rates refresh on page load. Survey-based ranges are from annual industry reports — not daily quotes.</div>
+
+    <!-- Section 1: Live Market Rates -->
+    <div class="comm-section">
+      <div class="comm-section-header">
+        <div class="comm-section-title" data-i18n="liveMarketRates">Live Market Rates</div>
+        <span class="freq-live" data-i18n="freqLive">↻ Live</span>
+      </div>
+      <table class="comm-table">
+        <thead><tr><th data-i18n="thCommodity">Commodity</th><th data-i18n="thRegion">Region</th><th data-i18n="thPrice">Price</th><th data-i18n="thSource">Source</th><th data-i18n="thFrequency">Frequency</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>USD / IDR</td>
+            <td>Jakarta</td>
+            <td class="comm-val" id="c-usdidr">—</td>
+            <td><a class="comm-source-link" href="https://open.er-api.com" target="_blank" rel="noopener">open.er-api.com</a></td>
+            <td><span class="freq-live" data-i18n="freqLive">Live</span></td>
+          </tr>
+          <tr>
+            <td>Gold (XAU/USD)</td>
+            <td>London / Global</td>
+            <td class="comm-val" id="c-gold">—</td>
+            <td><a class="comm-source-link" href="https://goldprice.org" target="_blank" rel="noopener">goldprice.org</a></td>
+            <td><span class="freq-live" data-i18n="freqLive">Live</span></td>
+          </tr>
+          <tr>
+            <td>Brent Crude (BZ=F)</td>
+            <td>ICE</td>
+            <td class="comm-val" id="c-brent">—</td>
+            <td><a class="comm-source-link" href="https://finance.yahoo.com/quote/BZ%3DF/" target="_blank" rel="noopener">Yahoo Finance</a></td>
+            <td><span class="freq-live" data-i18n="freqLive">Live</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 2: Palm Oil -->
+    <div class="comm-section">
+      <div class="comm-section-header">
+        <div class="comm-section-title">Palm Oil (CPO)</div>
+        <span class="freq-monthly" data-i18n="freqMonthly">Monthly</span>
+      </div>
+      <table class="comm-table">
+        <thead><tr><th data-i18n="thRegionExch">Region / Exchange</th><th data-i18n="thRefPrice">Reference Price</th><th data-i18n="thSource">Source</th><th data-i18n="thFrequency">Frequency</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Malaysia (BMD)</td>
+            <td class="comm-val">~$1,090 / t</td>
+            <td><a class="comm-source-link" href="https://www.mpoc.org.my/market-insight/daily-palm-oil-prices/" target="_blank" rel="noopener">MPOC Daily Prices</a></td>
+            <td><span class="freq-live" data-i18n="freqLive">Daily</span></td>
+          </tr>
+          <tr>
+            <td>Indonesia (KEMENDAG HPE)</td>
+            <td class="comm-val">~$1,050 / t</td>
+            <td><a class="comm-source-link" href="https://www.kemendag.go.id/en/economic-data/agricultural-products/reference-price-of-crude-palm-oil" target="_blank" rel="noopener">Ministry of Trade</a></td>
+            <td><span class="freq-monthly" data-i18n="freqMonthly">Monthly</span></td>
+          </tr>
+          <tr>
+            <td>Rotterdam FOB</td>
+            <td class="comm-val">~$1,110 / t</td>
+            <td><a class="comm-source-link" href="https://www.mpoc.org.my/market-insight/daily-palm-oil-prices/" target="_blank" rel="noopener">MPOC Daily Prices</a></td>
+            <td><span class="freq-live" data-i18n="freqLive">Daily</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="comm-note" data-i18n="palmNote">Prices are indicative. Live FCPO futures on Bursa Malaysia are CORS-blocked from browser. For exact daily data, visit MPOC directly.</div>
+    </div>
+
+    <!-- Section 3: OCC / Recovered Fibre -->
+    <div class="comm-section">
+      <div class="comm-section-header">
+        <div class="comm-section-title">OCC / Recovered Fibre</div>
+        <span class="freq-monthly" data-i18n="freqMonthly">Monthly</span>
+      </div>
+      <table class="comm-table">
+        <thead><tr><th data-i18n="thRegion">Region</th><th data-i18n="thRefRange">Reference Range</th><th data-i18n="thSource">Source</th><th data-i18n="thFrequency">Frequency</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>USA (Mixed OCC #11)</td>
+            <td class="comm-val">$65 – $90 / short ton</td>
+            <td><a class="comm-source-link" href="https://www.isri.org/recycling-commodities/paper-grades" target="_blank" rel="noopener">ISRI Grade List</a></td>
+            <td><span class="freq-monthly" data-i18n="freqMonthly">Monthly</span></td>
+          </tr>
+          <tr>
+            <td>China (Import OCC)</td>
+            <td class="comm-val">$115 – $130 / t</td>
+            <td><a class="comm-source-link" href="https://www.fastmarkets.com/commodities/forest-products/paper/recovered-paper/" target="_blank" rel="noopener">Fastmarkets</a></td>
+            <td><span class="freq-monthly" data-i18n="freqMonthly">Monthly</span></td>
+          </tr>
+          <tr>
+            <td>SE Asia (Domestic)</td>
+            <td class="comm-val">$120 – $145 / t</td>
+            <td>Market estimate</td>
+            <td><span class="freq-annual" data-i18n="freqAnnual">Quarterly</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="comm-note" data-i18n="occNote">Live OCC pricing from Fastmarkets and RISI requires a paid subscription. Free indicative ranges above are from ISRI published grade schedules and industry contacts.</div>
+    </div>
+
+    <!-- Section 4: MDF & Particleboard -->
+    <div class="comm-section">
+      <div class="comm-section-header">
+        <div class="comm-section-title">MDF &amp; Particleboard</div>
+        <span class="freq-annual" data-i18n="freqAnnual">Annual Survey</span>
+      </div>
+      <table class="comm-table">
+        <thead><tr><th data-i18n="thProduct">Product</th><th data-i18n="thRegion">Region</th><th data-i18n="thRefRange">Reference Range</th><th data-i18n="thSource">Source</th><th data-i18n="thAsOf">As of</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>MDF</td>
+            <td>SE Asia export</td>
+            <td class="comm-val">$280 – $320 / m³</td>
+            <td><a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">Wood Markets</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+          <tr>
+            <td>MDF</td>
+            <td>China domestic</td>
+            <td class="comm-val">$240 – $275 / m³</td>
+            <td><a class="comm-source-link" href="https://www.csil.it" target="_blank" rel="noopener">CSIL</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+          <tr>
+            <td>MDF</td>
+            <td>Europe</td>
+            <td class="comm-val">$370 – $440 / m³</td>
+            <td><a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">Wood Markets</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+          <tr>
+            <td>Particleboard</td>
+            <td>SE Asia</td>
+            <td class="comm-val">$240 – $280 / m³</td>
+            <td><a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">Wood Markets</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+          <tr>
+            <td>Particleboard</td>
+            <td>China domestic</td>
+            <td class="comm-val">$195 – $230 / m³</td>
+            <td><a class="comm-source-link" href="https://www.csil.it" target="_blank" rel="noopener">CSIL</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+          <tr>
+            <td>Particleboard</td>
+            <td>Europe</td>
+            <td class="comm-val">$270 – $330 / m³</td>
+            <td><a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">Wood Markets</a></td>
+            <td><span class="freq-annual">2025 annual</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="comm-note" data-i18n-html="mdfNote">No free real-time API exists for MDF or particleboard pricing. Full reports available at <a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">woodmarkets.com</a> and <a class="comm-source-link" href="https://www.csil.it" target="_blank" rel="noopener">csil.it</a> (paid). Annual preview summaries are publicly available.</div>
+    </div>
+
+    <div style="height:40px"></div>
+  </div>
+</div>
+
+<!-- ─── DETAIL PAGE ─── -->
+<div class="detail-page" id="detail-page">
+  <div class="detail-nav">
+    <button class="detail-back" onclick="closeDetail()"><span class="detail-back-arrow">←</span> <span data-i18n="backBriefing">Back to Briefing</span></button>
+    <div class="detail-brand" data-i18n="detailBrand">Tjipta Group Intelligence</div>
+    <div style="width:140px"></div>
+  </div>
+  <div class="detail-content" id="detail-body"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+// ── CONFIG ──
+const CONFIG = {
+  SHEET_ID: '1cHU26DFkgUgjbTRTUAw1f8UJ50ECU1xd9pKTvijxcbg',
+  // No API key needed — uses Google Sheets public JSON export endpoint.
+  // Only requirement: share the Google Sheet as "Anyone with link → Viewer" in Google Drive.
+};
+
+// ── LANGUAGE TOGGLE ──
+const TRANSLATIONS = {
+  en: {
+    brandSub: 'Morning Intelligence Brief · Indonesia',
+    todaySummary: "Today's Summary",
+    indonesiaToday: 'Indonesia Today',
+    globalToday: 'Global Today',
+    navPaper: 'Paper & Packaging',
+    navWood: 'Wood & Timber',
+    navEconomy: 'Economy',
+    navFinance: 'Finance & Banking',
+    navTrade: 'SE Asia Trade',
+    tickCommodity: 'Commodity Prices',
+    tickLiveInd: '↻ live',
+    tickDailyInd: '↻ daily',
+    tickMonthlyInd: '↻ monthly',
+    tickPerMeetingInd: '↻ per meeting',
+    sidebarTitle: 'Commodity Prices',
+    seeAll: 'See all →',
+    sbLiveRates: 'Live Rates',
+    badgeDaily: '↻ Daily',
+    sbPalmOil: 'Palm Oil (CPO)',
+    badgeMonthly: 'Monthly',
+    sbOCC: 'OCC / Recovered Fibre',
+    sbParticle: 'Particleboard',
+    sbBIRate: 'BI Rate',
+    badge2025: '2025 Survey',
+    backBriefing: 'Back to Briefing',
+    detailBrand: 'Tjipta Group Intelligence',
+    commRefBrand: 'Commodity Reference Prices',
+    commTitle: 'Commodity Prices',
+    commSubtitle: 'Reference prices by region. Live rates refresh on page load. Survey-based ranges are from annual industry reports — not daily quotes.',
+    liveMarketRates: 'Live Market Rates',
+    thCommodity: 'Commodity', thRegion: 'Region', thPrice: 'Price', thSource: 'Source', thFrequency: 'Frequency',
+    thRefPrice: 'Reference Price', thRefRange: 'Reference Range', thProduct: 'Product', thAsOf: 'As of',
+    thRegionExch: 'Region / Exchange',
+    freqLive: 'Live', freqMonthly: 'Monthly', freqAnnual: 'Annual Survey',
+    palmNote: 'Prices are indicative. Live FCPO futures on Bursa Malaysia are CORS-blocked from browser. For exact daily data, visit MPOC directly.',
+    occNote: 'Live OCC pricing from Fastmarkets and RISI requires a paid subscription. Free indicative ranges above are from ISRI published grade schedules and industry contacts.',
+    mdfNote: 'No free real-time API exists for MDF or particleboard pricing. Full reports available at <a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">woodmarkets.com</a> and <a class="comm-source-link" href="https://www.csil.it" target="_blank" rel="noopener">csil.it</a> (paid). Annual preview summaries are publicly available.',
+    badgeNew: 'New',
+    emptyNoData: 'No briefing data yet for this category. Run the morning briefing script to populate it.',
+    emptyNoMatch: 'No items match this filter.',
+    secWhatsHappening: "What's happening",
+    secSeverity: 'Severity Assessment',
+    secScoreLabel: 'Why this score',
+    secImpact: 'Impact on our businesses',
+    secAction: 'What to do next',
+    secActionLabel: 'Recommended Action',
+    secSources: 'Sources',
+    noSources: 'No sources available.',
+    toggleBtn: 'ID',
+    langLocale: 'en-GB',
+  },
+  id: {
+    brandSub: 'Laporan Intelijen Pagi · Indonesia',
+    todaySummary: 'Ringkasan Hari Ini',
+    indonesiaToday: 'Indonesia Hari Ini',
+    globalToday: 'Global Hari Ini',
+    navPaper: 'Kertas & Kemasan',
+    navWood: 'Kayu & Kayu Olahan',
+    navEconomy: 'Ekonomi',
+    navFinance: 'Keuangan & Perbankan',
+    navTrade: 'Perdagangan Asia Tenggara',
+    tickCommodity: 'Harga Komoditas',
+    tickLiveInd: '↻ langsung',
+    tickDailyInd: '↻ harian',
+    tickMonthlyInd: '↻ bulanan',
+    tickPerMeetingInd: '↻ per rapat',
+    sidebarTitle: 'Harga Komoditas',
+    seeAll: 'Lihat semua →',
+    sbLiveRates: 'Nilai Langsung',
+    badgeDaily: '↻ Harian',
+    sbPalmOil: 'Minyak Sawit (CPO)',
+    badgeMonthly: 'Bulanan',
+    sbOCC: 'OCC / Serat Daur Ulang',
+    sbParticle: 'Papan Partikel',
+    sbBIRate: 'Suku Bunga BI',
+    badge2025: 'Survei 2025',
+    backBriefing: 'Kembali ke Siaran',
+    detailBrand: 'Intelijen Tjipta Group',
+    commRefBrand: 'Harga Referensi Komoditas',
+    commTitle: 'Harga Komoditas',
+    commSubtitle: 'Harga referensi per wilayah. Nilai langsung diperbarui saat halaman dimuat. Rentang berbasis survei berasal dari laporan industri tahunan — bukan kutipan harian.',
+    liveMarketRates: 'Nilai Pasar Langsung',
+    thCommodity: 'Komoditas', thRegion: 'Wilayah', thPrice: 'Harga', thSource: 'Sumber', thFrequency: 'Frekuensi',
+    thRefPrice: 'Harga Referensi', thRefRange: 'Rentang Referensi', thProduct: 'Produk', thAsOf: 'Per Tanggal',
+    thRegionExch: 'Wilayah / Bursa',
+    freqLive: 'Langsung', freqMonthly: 'Bulanan', freqAnnual: 'Survei Tahunan',
+    palmNote: 'Harga bersifat indikatif. Futures FCPO langsung di Bursa Malaysia diblokir CORS dari browser. Untuk data harian yang tepat, kunjungi MPOC secara langsung.',
+    occNote: 'Harga OCC langsung dari Fastmarkets dan RISI memerlukan langganan berbayar. Rentang indikatif di atas berasal dari jadwal kelas ISRI yang dipublikasikan dan kontak industri.',
+    mdfNote: 'Tidak ada API real-time gratis untuk harga MDF atau papan partikel. Laporan lengkap tersedia di <a class="comm-source-link" href="https://www.woodmarkets.com" target="_blank" rel="noopener">woodmarkets.com</a> dan <a class="comm-source-link" href="https://www.csil.it" target="_blank" rel="noopener">csil.it</a> (berbayar). Pratinjau tahunan tersedia secara publik.',
+    badgeNew: 'Baru',
+    emptyNoData: 'Belum ada data siaran untuk kategori ini. Jalankan skrip siaran pagi untuk mengisi data.',
+    emptyNoMatch: 'Tidak ada artikel yang cocok dengan filter ini.',
+    secWhatsHappening: 'Yang Terjadi',
+    secSeverity: 'Penilaian Urgensi',
+    secScoreLabel: 'Alasan skor ini',
+    secImpact: 'Dampak pada bisnis kita',
+    secAction: 'Langkah selanjutnya',
+    secActionLabel: 'Tindakan yang Direkomendasikan',
+    secSources: 'Sumber Artikel',
+    noSources: 'Tidak ada sumber tersedia.',
+    toggleBtn: 'EN',
+    langLocale: 'id-ID',
+  }
+};
+
+let currentLang = localStorage.getItem('tjipta_lang') || 'en';
+
+function t(key) {
+  return TRANSLATIONS[currentLang][key] || TRANSLATIONS.en[key] || key;
+}
+
+function applyLang() {
+  const T = TRANSLATIONS[currentLang];
+  // Update all data-i18n elements (textContent)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (T[key] !== undefined) el.textContent = T[key];
+  });
+  // Update data-i18n-html elements (innerHTML — for notes with links)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (T[key] !== undefined) el.innerHTML = T[key];
+  });
+  // Toggle button label
+  const btn = document.getElementById('lang-toggle-btn');
+  if (btn) btn.textContent = T.toggleBtn;
+  // Update BI Rate in sidebar (it's a value, not a label)
+  const sbirate = document.getElementById('sb-birate');
+  if (sbirate && window.LIVE_PRICES?.bi_rate) sbirate.textContent = window.LIVE_PRICES.bi_rate.toFixed(2) + '%';
+  // Re-render current view to pick up translated "New"/"Baru" badge and empty states
+  if (mode === 'trending') {
+    const catName = cat;
+    setTrending(catName === 'Indonesia Today' ? 'indonesia' : 'global');
+  } else {
+    render();
+  }
+  // Store preference
+  localStorage.setItem('tjipta_lang', currentLang);
+  document.documentElement.lang = currentLang === 'id' ? 'id' : 'en';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'id' : 'en';
+  applyLang();
+}
+
+// ── CLOCK & DATE RANGE ──
+function updateDate(){
+  const n=new Date();
+  const opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  const locale=t('langLocale');
+  document.getElementById('hdr-date').textContent=n.toLocaleDateString(locale,opts)+' · WIB '+n.toLocaleTimeString(locale,{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit'});
+  const sevenDaysAgo=new Date(n-7*24*60*60*1000);
+  const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('date-range').textContent=fmt(sevenDaysAgo)+' – '+fmt(n);
+}
+setInterval(updateDate,60000);updateDate();
+
+// ── LIVE PRICE TICKER ──
+async function fetchLivePrices(){
+  // USD/IDR — open.er-api.com has CORS headers, works from file://
+  try{
+    const d=await(await fetch('https://open.er-api.com/v6/latest/USD')).json();
+    if(d.rates&&d.rates.IDR){
+      const fmt=Math.round(d.rates.IDR).toLocaleString('id-ID');
+      document.getElementById('tick-usdidr').textContent=fmt;
+      document.getElementById('sb-usdidr').textContent=fmt;
+    }
+  }catch(e){}
+  // Gold + Brent — both blocked by file:// CORS; fetched server-side by market_briefing.py → data.js
+  if(window.LIVE_PRICES?.gold){
+    const fmt='$'+Math.round(window.LIVE_PRICES.gold).toLocaleString()+'/oz';
+    document.getElementById('tick-gold').textContent=fmt;
+    document.getElementById('sb-gold').textContent=fmt;
+  }
+  if(window.LIVE_PRICES?.brent){
+    const fmt='$'+window.LIVE_PRICES.brent.toFixed(2)+'/bbl';
+    document.getElementById('tick-brent').textContent=fmt;
+    document.getElementById('sb-brent').textContent=fmt;
+  }
+  if(window.LIVE_PRICES?.methanol){
+    document.getElementById('tick-methanol').textContent='$'+window.LIVE_PRICES.methanol.toFixed(0)+'/MT';
+  }
+  if(window.LIVE_PRICES?.bi_rate){
+    const biFmt=window.LIVE_PRICES.bi_rate.toFixed(2)+'%';
+    document.getElementById('tick-birate').textContent=biFmt;
+    const sbBi=document.getElementById('sb-birate');
+    if(sbBi)sbBi.textContent=biFmt;
+  }
+}
+fetchLivePrices();
+
+// ── GOOGLE SHEET LOADER (JSONP — bypasses CORS for local file://) ──
+function parseGvizRows(rows){
+  return rows.map((row,i)=>{
+    const c=row.c||[];
+    const val=n=>c[n]?.v!=null?String(c[n].v):'';
+    return{
+      id:i+1,date:val(0),cat:val(1),h:val(2),
+      explanation:val(3),hakarindo_impact:val(4),tjipta_impact:val(5),
+      r6b_impact:val(6),action:val(7),severity_score:parseInt(val(8))||5,
+      severity_reason:val(9),u:val(10)||'Watch',
+      source_urls:val(11).split(',').map(s=>s.trim()).filter(Boolean),
+      preview:(val(3)||val(2)).slice(0,120)+'…'
+    };
+  });
+}
+
+function loadSheetData(){
+  if(!CONFIG.SHEET_ID) return Promise.resolve(null);
+  const sheetName=encodeURIComponent('Morning Briefing');
+  const base=`https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq`;
+  // When served over HTTPS (e.g. GitHub Pages), use fetch() — CORS works from real origins.
+  // When opened as file://, fall back to JSONP script injection.
+  if(location.protocol==='https:'){
+    return fetch(`${base}?tqx=out:json&sheet=${sheetName}`)
+      .then(r=>r.text())
+      .then(txt=>{
+        // Response is wrapped: google.visualization.Query.setResponse({...})
+        const m=txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/);
+        if(!m) return null;
+        const resp=JSON.parse(m[1]);
+        const rows=resp.table?.rows||[];
+        return rows.length?parseGvizRows(rows):null;
+      })
+      .catch(()=>null);
+  }
+  // file:// fallback: JSONP (Google ignores handler param, so parse response text instead)
+  return new Promise(resolve=>{
+    const cb='_gviz_'+Date.now();
+    const timer=setTimeout(()=>{cleanup();resolve(null);},10000);
+    function cleanup(){delete window[cb];if(script.parentNode)script.remove();}
+    window[cb]=function(resp){
+      clearTimeout(timer);cleanup();
+      try{const rows=resp.table?.rows||[];resolve(rows.length?parseGvizRows(rows):null);}
+      catch(e){resolve(null);}
+    };
+    const script=document.createElement('script');
+    script.src=`${base}?tqx=reqId:1;handler:${cb}&sheet=${sheetName}`;
+    script.onerror=()=>{clearTimeout(timer);cleanup();resolve(null);};
+    document.head.appendChild(script);
+  });
+}
+
+// ── FALLBACK EMBEDDED DATA ──
+let DATA=[
+  {
+    id:1,date:'2026-03-17',cat:'Paper & Packaging',
+    h:"Indonesia's waste paper collection faces capacity constraints amid rising e-commerce volumes",
+    preview:"Domestic OCC supply tightening as collection infrastructure struggles to keep pace with surging e-commerce packaging volumes.",
+    u:'HIGH',
+    explanation:"Indonesia's waste paper and OCC (Old Corrugated Containers) collection infrastructure is facing significant strain as the rapid growth of e-commerce has dramatically increased the volume of corrugated packaging entering the waste stream. While this theoretically creates more recyclable material, the country's collection and sorting networks have not scaled at the same pace, creating a paradox where more paper waste exists but less is efficiently collected and processed into usable raw material.\n\nThe tightening of domestic OCC supply has two simultaneous effects on manufacturers like Hakarindo: it reduces the availability of the primary raw material needed for corrugated board production, and it drives up the spot price as multiple manufacturers compete for the same constrained supply. This is particularly acute in Java and Sumatra, where most of Hakarindo's manufacturing facilities are concentrated.\n\nIndustry analysts expect this constraint to persist through 2026 unless the government accelerates investment in waste collection infrastructure, which is currently under discussion as part of Indonesia's extended producer responsibility (EPR) regulations.",
+    severity_score:8,
+    severity_reason:"Direct impact on Hakarindo's primary input cost. OCC typically represents 60-70% of total raw material cost for corrugated manufacturers. A supply-driven price increase of even 5-10% would materially affect the 2025 EBITDA recovery target of IDR 8.5B.",
+    hakarindo_impact:"Hakarindo's corrugated manufacturing operations across Pekanbaru, Karawang, and Palembang all depend on domestic OCC supply. Tightening supply means procurement teams must act faster on spot market purchases or negotiate longer-term supply agreements at current prices before further increases.",
+    tjipta_impact:"Indirect impact only. Tjipta Group does not use waste paper as a raw material, but monitors the paper market as an indicator of broader Indonesian manufacturing demand trends.",
+    r6b_impact:"No direct impact. R6B Group's palm oil operations are unaffected by paper supply dynamics.",
+    action:"Recommend: Review OCC procurement strategy this week. Consider locking in 30-60 day forward contracts at current prices before supply tightens further. Engage with existing waste paper suppliers to assess their collection volumes and flag any upcoming shortfalls.",
+    source_urls:['https://ekonomi.bisnis.com/read/industri-kertas','https://www.ipca.or.id/berita','https://www.worldpackaging.org/news']
+  },
+  {
+    id:2,date:'2026-03-17',cat:'Paper & Packaging',
+    h:'Global cardboard box prices remain elevated due to persistent OCC shortage and shipping volatility',
+    preview:"International cardboard benchmarks hold near multi-year highs as raw material shortages persist globally.",
+    u:'HIGH',
+    explanation:"Global corrugated cardboard prices have remained stubbornly elevated through early 2026, driven by the combination of persistent OCC shortages in major collection markets (particularly the US and EU following changes to China's import policies) and ongoing volatility in transoceanic shipping rates that affects the cost of importing alternative raw materials.\n\nFor Indonesian manufacturers, this global price elevation is a double-edged dynamic. On the selling side, it provides some justification for passing cost increases to customers, particularly export-oriented customers who are accustomed to global benchmark pricing. However, on the cost side, it increases the price of any imported recovered fibre that Hakarindo might need to supplement domestic OCC supply.\n\nThe situation is expected to moderate in H2 2026 as new recycled fibre capacity comes online in Southeast Asia, but near-term pressure is likely to persist through Q2.",
+    severity_score:8,
+    severity_reason:"Dual impact: raw material cost pressure and customer pricing pressure. Hakarindo's IKEA supply relationship and e-commerce customers operate on contract pricing that may not be immediately adjustable, creating a timing mismatch between cost increases and price recovery.",
+    hakarindo_impact:"Margin compression is the primary risk. Hakarindo's contracts with IKEA and major e-commerce customers likely have fixed pricing windows of 3-6 months. If OCC costs rise within that window, margins absorb the full impact until the next pricing review.",
+    tjipta_impact:"Tjipta Group's MDF and wood panel operations are unaffected by corrugated paper pricing, but the broader inflationary trend in packaging reflects input cost pressures that are likely mirrored in resin and chemical markets.",
+    r6b_impact:"No direct impact on palm oil operations.",
+    action:"Recommend: Initiate pricing review conversations with top 3 customers before contract renewal dates. Model margin impact of a 10% OCC price increase across current production volumes and present findings to leadership.",
+    source_urls:['https://www.fastmarkets.com/insights/paper-packaging','https://www.packagingdigest.com/corrugated','https://www.risiinfo.com/risi-news/paper']
+  },
+  {
+    id:3,date:'2026-03-17',cat:'Paper & Packaging',
+    h:'IDR weakens against USD amid regional currency pressures and Federal Reserve rate expectations',
+    preview:"Rupiah softness adds to USD-denominated input cost pressure across the group.",
+    u:'Medium',
+    explanation:"The Indonesian Rupiah has faced renewed selling pressure as regional currencies broadly weakened in response to signals from the US Federal Reserve that interest rate cuts may be delayed further into 2026. A stronger USD relative to the IDR increases the cost of all USD-denominated imports and raw materials for Indonesian manufacturers.\n\nFor the Hakarindo group, this currency dynamic is a persistent background pressure rather than a sudden shock. Most raw material contracts in the paper and packaging industry are denominated in USD, meaning every percentage point of IDR weakness directly translates into higher production costs in Rupiah terms.\n\nBank Indonesia has been managing the Rupiah through a combination of rate policy and foreign exchange intervention, but the structural pressure from a strengthening USD remains difficult to fully offset.",
+    severity_score:5,
+    severity_reason:"Affects all three group companies simultaneously but is manageable in the short term. The Rupiah has weakened approximately 3% over the past 6 months — meaningful but not yet at crisis levels. Monitoring for acceleration is important.",
+    hakarindo_impact:"OCC and imported recovered fibre — both priced in USD — become more expensive in IDR terms. Every 100 IDR depreciation per USD increases raw material costs by approximately 0.6% on current procurement volumes.",
+    tjipta_impact:"Chemical inputs including urea formaldehyde and melamine resins are internationally traded in USD. IDR weakness directly increases the IDR cost of these materials, compressing Tjipta's manufacturing margins.",
+    r6b_impact:"Palm oil is a USD-denominated commodity so R6B's revenue receipts also benefit from IDR weakness — this partially offsets the cost pressures faced by Hakarindo and Tjipta.",
+    action:"Recommend: Review treasury hedging positions. Assess whether any USD payables can be settled earlier to lock in current rates. R6B's USD revenue exposure may provide a natural hedge — coordinate with treasury on group-level currency exposure netting.",
+    source_urls:['https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_256826.aspx','https://www.reuters.com/markets/currencies/indonesia','https://www.bloomberg.com/asia']
+  },
+  {
+    id:4,date:'2026-03-17',cat:'Southeast Asia Trade',
+    h:'Indonesian government implements new export tax on waste paper and recycled fibre',
+    preview:"New regulation restricts OCC exports to protect domestic manufacturing capacity, raising input costs for local producers.",
+    u:'HIGH',
+    explanation:"The Indonesian Ministry of Trade has implemented a new export levy on waste paper and recycled fibre, joining other raw materials subject to export restrictions as part of Indonesia's broader downstream industrialisation policy. The government's stated objective is to ensure that recovered fibre is processed domestically rather than exported to Chinese and Vietnamese paper mills.\n\nWhile the policy intent is to benefit domestic paper manufacturers by keeping raw materials in-country, the immediate market effect is more complex. Export restrictions reduce the global supply available to international buyers, potentially raising international OCC prices. At the same time, domestic prices may rise as the previously export-bound supply is redirected to the domestic market — but this is subject to how well collection and aggregation networks respond.\n\nThis regulation follows similar export restriction policies applied to nickel ore, palm kernel shells, and other commodities, and reflects a consistent government philosophy of adding value domestically.",
+    severity_score:9,
+    severity_reason:"This is the most directly impactful regulatory development for Hakarindo in this briefing. The export tax changes the structural supply dynamics of Hakarindo's primary raw material. While supply should theoretically increase domestically, pricing dynamics and collection network response remain uncertain.",
+    hakarindo_impact:"Hakarindo's OCC procurement team should closely monitor spot price movements over the next 30 days to assess whether the regulation is increasing domestic availability (bullish for costs) or simply creating market confusion (neutral to bearish). Direct engagement with waste paper aggregators and collectors is recommended.",
+    tjipta_impact:"No direct impact on wood and timber operations. However, Tjipta should monitor for analogous policies affecting wood waste, timber off-cuts, or resin precursor chemicals, as the government has shown willingness to extend downstream policy to multiple commodity categories.",
+    r6b_impact:"No direct impact on palm oil operations. R6B should note that export restriction policies could eventually extend to palm oil by-products — this is a longer-term policy risk to monitor.",
+    action:"Recommend: Legal and procurement teams should review the full text of the new regulation to understand the levy rate, applicability dates, and any exemptions for domestic manufacturers. Engage industry association (IPCA or APKI) to understand how other manufacturers are responding and whether collective advocacy is appropriate.",
+    source_urls:['https://www.kemendag.go.id/berita/regulasi','https://www.kontan.co.id/tag/regulasi-ekspor','https://www.apki.or.id/berita']
+  },
+  {
+    id:5,date:'2026-03-17',cat:'Southeast Asia Trade',
+    h:'ASEAN trade agreement modifications increase tariff barriers on wood products and engineered timber',
+    preview:"New tariff structure creates headwinds for Tjipta Group's regional export sales.",
+    u:'Medium',
+    explanation:"Recent modifications to ASEAN trade agreements have introduced higher tariff rates on specific categories of wood products and engineered timber, including MDF, particleboard, OSB, and laminated timber products. These changes reflect concerns from several ASEAN member states about Chinese-origin wood products being transshipped through ASEAN countries to take advantage of preferential tariff rates.\n\nThe practical effect is twofold: Indonesian wood product exporters like Tjipta Group face higher duties when selling into markets such as Vietnam, Thailand, and the Philippines, while the competitiveness of Chinese-origin products in those same markets is also partially reduced if enforcement is effective.\n\nThe net impact on Tjipta depends heavily on the specific product categories affected by the new tariff schedule and the proportion of revenue derived from the affected export markets.",
+    severity_score:5,
+    severity_reason:"Export headwinds for Tjipta Group are real but the impact is market-specific. If the affected markets represent less than 20% of Tjipta's export revenue, the impact is manageable. Requires detailed analysis of Tjipta's export customer breakdown to quantify.",
+    hakarindo_impact:"No direct impact on corrugated packaging operations, though the general trend of increasing trade barriers in the region signals a more complex environment for Indonesian manufacturers across all categories.",
+    tjipta_impact:"MDF, particleboard, OSB, and fingerjoint timber exports to ASEAN markets may face higher duty rates at destination. Tjipta should urgently assess which specific HS codes are affected and the corresponding revenue exposure. The reduction in Chinese competition in those markets provides partial offset.",
+    r6b_impact:"No direct impact on palm oil operations, though palm oil has historically been subject to its own ASEAN trade policy complexities.",
+    action:"Recommend: Tjipta Group's export sales team should review the new HS code tariff schedule immediately. Engage logistics and customs agents in key export markets (Vietnam, Thailand, Philippines) to quantify the effective duty increase per product category and assess price competitiveness.",
+    source_urls:['https://asean.org/our-communities/economic-community/trade','https://www.lpei.go.id/berita','https://www.woodmarkets.com/category/mdf']
+  },
+  {
+    id:6,date:'2026-03-17',cat:'Indonesia Economy',
+    h:'Bank Indonesia signals potential rate hikes to defend the rupiah and control inflation',
+    preview:"BI rate increase signals raise borrowing costs for working capital and expansion financing across the group.",
+    u:'HIGH',
+    explanation:"Bank Indonesia's monetary policy committee has signalled that rate increases remain on the table as the central bank balances two competing objectives: defending the Rupiah against USD strength and keeping domestic inflation in check. Governor Perry Warjiyo indicated that the BI 7-day reverse repo rate could be adjusted upward if currency pressure intensifies or if inflation data comes in above the 2.5-3.5% target band.\n\nFor Indonesian businesses, rate increases translate directly into higher borrowing costs on working capital credit facilities, term loans, and bonds. For capital-intensive manufacturers, the impact is felt through both the cost of existing variable-rate debt and the cost of any new financing needed for expansion or equipment upgrades.\n\nThis is particularly relevant for Hakarindo given its 2025 EBITDA recovery target — higher interest costs work directly against EBITDA improvement, as interest expense reduces the financial headroom available to rebuild profitability after 2024's losses.",
+    severity_score:8,
+    severity_reason:"Directly impacts Hakarindo's EBITDA recovery. 2024 interest expense was IDR 5B against an EBITDA of IDR 6B. If rates increase by 50bps and debt levels are unchanged, interest costs rise by approximately IDR 250M-500M — material relative to the IDR 8.5B EBITDA target needed for breakeven.",
+    hakarindo_impact:"Working capital facility costs will rise if BI increases rates. Hakarindo's finance team should model the impact of a 25bp and 50bp rate increase on current debt levels and assess whether refinancing to fixed-rate instruments before any increase makes sense.",
+    tjipta_impact:"Tjipta Group's expansion financing and working capital facilities are similarly exposed to rate increases. Capital expenditure decisions, including the 2025 new corrugator investment, should be reassessed under higher-rate scenarios.",
+    r6b_impact:"R6B Group's plantation and refinery financing is also rate-sensitive. However, palm oil's USD revenue provides some natural protection — stronger USD (which drives rate pressure) also improves IDR-equivalent revenue.",
+    action:"Recommend: CFO-level review of group-wide interest rate exposure. Assess proportion of variable vs fixed rate debt. Model impact of 25bp and 50bp increases. Consider approaching banking partners about fixing rates on key facilities before any BI announcement.",
+    source_urls:['https://www.bi.go.id/id/publikasi/kebijakan-moneter/Pages/default.aspx','https://bisnis.tempo.co/makroekonomi','https://www.reuters.com/world/asia-pacific/indonesia']
+  },
+  {
+    id:7,date:'2026-03-17',cat:'Indonesia Economy',
+    h:'Global demand for furniture and packaging softens amid economic uncertainty in key export markets',
+    preview:"IKEA and other export customer order volumes at risk as global consumer spending weakens.",
+    u:'Medium',
+    explanation:"Global furniture and consumer goods demand has softened as elevated interest rates in the US and Europe have dampened consumer spending on big-ticket household items. Furniture purchases, which boomed during the pandemic work-from-home period, have normalised and in some markets declined year-on-year.\n\nFor Hakarindo, this is relevant primarily through its IKEA supply relationship — if IKEA's global sales volumes decline, the demand for the corrugated packaging that Hakarindo supplies for IKEA's knockdown furniture products will also decline. Similarly, Tjipta Group's furniture component manufacturing for IKEA and other global brands faces demand headwinds.\n\nThe impact is expected to be moderate rather than severe — major retailers like IKEA are managing inventory more actively but are not significantly reducing supplier relationships. The primary effect is likely to be volume rather than relationship disruption.",
+    severity_score:5,
+    severity_reason:"The IKEA relationship represents a meaningful proportion of revenue for both Hakarindo and Tjipta. Volume softness of even 5-10% over 1-2 quarters would require other customer channels to compensate. The domestic Indonesian e-commerce and FMCG packaging segments provide partial natural offset.",
+    hakarindo_impact:"IKEA-specific corrugated box orders may see volume reductions in Q2-Q3 2026. Hakarindo's sales team should proactively engage IKEA's procurement team to understand order pipeline visibility and assess whether domestic FMCG or e-commerce packaging volumes can compensate.",
+    tjipta_impact:"Tjipta's furniture component and MDF supply to global brands faces the same demand headwind. Diversification towards domestic Indonesian furniture market customers (which benefit from growing middle class spending) may provide partial offset.",
+    r6b_impact:"No direct impact on palm oil operations from furniture market dynamics.",
+    action:"Recommend: Request 90-day order forecast from IKEA procurement by end of month. Assess capacity reallocation options to domestic customers if IKEA volumes soften. Build scenario models for 5%, 10%, and 20% volume reduction cases.",
+    source_urls:['https://www.ikea.com/global/en/newsroom/sustainability','https://www.furnituretoday.com/research/consumer-spending','https://www.oxfordeconomics.com/global-economic-model']
+  },
+  {
+    id:8,date:'2026-03-17',cat:'Indonesia Finance & Banking',
+    h:'Indonesian banks tighten lending standards on commodity sector exposure amid price volatility',
+    preview:"Credit access for commodity-linked businesses faces increased scrutiny from Indonesian banking sector.",
+    u:'Medium',
+    explanation:"Indonesia's major commercial banks, including BCA, Mandiri, and BRI, have reportedly tightened their credit assessment frameworks for businesses with significant commodity price exposure following increased volatility in palm oil, coal, and nickel markets. This involves higher collateral requirements, tighter covenant structures, and more conservative revenue projection assumptions in credit models.\n\nWhile this tightening is primarily focused on direct commodity trading and extraction businesses, it has secondary effects on manufacturers whose margins are exposed to commodity input costs — a category that includes corrugated paper manufacturers and wood products companies whose costs track waste paper, timber, and resin commodity prices.\n\nThe tightening reflects broader banking sector caution following some high-profile credit losses in the commodities space in 2024-2025.",
+    severity_score:5,
+    severity_reason:"Primary concern is for R6B Group's refinancing and for Tjipta's expansion financing. Hakarindo's working capital facilities may also face more detailed covenant scrutiny at next renewal. The risk is manageable if the group maintains transparent reporting relationships with its banking partners.",
+    hakarindo_impact:"Working capital credit lines may face tighter terms at renewal. Hakarindo should prepare comprehensive management accounts and updated financial projections to support any credit review conversations — particularly the narrative around EBITDA recovery trajectory.",
+    tjipta_impact:"New equipment financing for Tjipta Group's expansion plans (including the 2025 corrugator investment) may face more conservative lending terms. Pre-application engagement with relationship banks is recommended.",
+    r6b_impact:"Most directly affected given direct commodity exposure. R6B's banking relationships should be proactively managed with detailed commodity price scenarios and hedging strategies presented to lenders.",
+    action:"Recommend: Group CFO should schedule relationship meetings with top 3 banking partners within the next 30 days. Present updated group financial performance, EBITDA recovery trajectory, and commodity exposure management approach proactively before any formal credit review.",
+    source_urls:['https://www.ojk.go.id/id/berita-dan-kegiatan/siaran-pers/Pages/default.aspx','https://keuangan.kontan.co.id/perbankan','https://www.bankmandiri.co.id/web/guest/newsroom']
+  },
+  {
+    id:9,date:'2026-03-17',cat:'Indonesia Finance & Banking',
+    h:'IDR weakens to multi-month lows against USD as global risk sentiment deteriorates',
+    preview:"Rupiah at weakest level in several months, creating group-wide cost pressure on USD-denominated inputs.",
+    u:'HIGH',
+    explanation:"The Indonesian Rupiah has depreciated to multi-month lows against the US Dollar as global risk-off sentiment has driven capital flows away from emerging market currencies. The USD/IDR rate at 16,420 represents a meaningful deterioration from the 15,800-16,000 range seen in late 2025.\n\nThis level of currency weakness is becoming operationally significant for Indonesian manufacturers with USD-denominated input costs. At 16,420, every dollar of raw material cost represents approximately 3-5% more in Rupiah terms compared to the rates embedded in most Q4 2025 financial planning assumptions.\n\nBank Indonesia has been intervening in the foreign exchange market to moderate the pace of depreciation, but structural factors — including the US Federal Reserve's rate stance and Indonesia's current account dynamics — suggest that Rupiah weakness could persist.",
+    severity_score:8,
+    severity_reason:"At current rates, the group's USD-denominated input costs are approximately IDR 1.5-2T higher in annual Rupiah terms compared to 6 months ago, assuming current procurement volumes. This is a material group-wide financial impact that requires active treasury management.",
+    hakarindo_impact:"OCC imports and any USD-priced recovered fibre are now approximately 3-4% more expensive in IDR terms than Q4 2025 planning rates. This should be factored into Q2 2026 budget revisions and customer pricing discussions.",
+    tjipta_impact:"Resin inputs (urea formaldehyde, melamine) sourced from international markets are more expensive in IDR. Chemical procurement team should assess whether local IDR-denominated alternatives are available for any portion of current USD procurement.",
+    r6b_impact:"USD revenue partially offsets group-wide cost pressure. R6B's palm oil export proceeds in USD are worth more in IDR at current rates — this natural hedge should be quantified and communicated to group treasury.",
+    action:"Recommend: Immediate group treasury review to quantify net USD exposure across all three companies. Identify natural hedges (R6B USD revenue vs Hakarindo/Tjipta USD costs). Assess whether forward contracts on near-term USD payables are cost-effective at current rates.",
+    source_urls:['https://www.bi.go.id/id/statistik/informasi-kurs/transaksi-bi/Pages/default.aspx','https://www.bloomberg.com/quote/USDIDR:CUR','https://money.kompas.com/kurs']
+  },
+  {
+    id:10,date:'2026-03-17',cat:'Wood & Timber',
+    h:'Plywood and wood panel prices soften across Southeast Asia amid Chinese export surge',
+    preview:"Chinese MDF and particleboard exports compress Tjipta Group's regional pricing power.",
+    u:'Medium',
+    explanation:"Chinese wood panel manufacturers, facing overcapacity domestically following a slowdown in China's property market, have been aggressively expanding export volumes into Southeast Asian markets. This has created a significant supply overhang in markets such as Vietnam, Thailand, Malaysia, and the Philippines that are also key export targets for Indonesian producers like Tjipta Group.\n\nMDF prices in Southeast Asia have softened by approximately 8-12% from their 2025 peak levels, with the most acute pressure in the mid-grade commodity MDF segment where Chinese producers have the greatest cost advantage. Higher-grade, specialty, and moisture-resistant MDF products have held pricing better as Chinese competition is less intense in these segments.\n\nThe situation mirrors broader patterns seen in solar panels, EVs, and steel, where Chinese industrial overcapacity has driven aggressive export pricing that creates significant pressure for regional competitors.",
+    severity_score:5,
+    severity_reason:"Tjipta Group's MDF and particleboard export margins are under structural pressure that is unlikely to reverse quickly. However, Tjipta's established relationships, FSC certification, and ability to serve customised product specifications provide competitive moats that pure commodity Chinese exports cannot easily replicate.",
+    hakarindo_impact:"Indirect awareness item. Wood panel pricing dynamics do not directly affect Hakarindo's corrugated paper operations.",
+    tjipta_impact:"Export pricing strategy requires urgent review. Tjipta should assess product mix shift towards higher-value, lower-competition segments (moisture-resistant, fire-rated, ultra-thin MDF) and towards domestic Indonesian demand which is less exposed to Chinese competition. FSC certification and IKEA relationship provide differentiation in quality-sensitive segments.",
+    r6b_impact:"No direct impact on palm oil operations.",
+    action:"Recommend: Tjipta sales and strategy team to complete a market positioning review within 30 days. Map current product portfolio against Chinese competitive exposure by product category. Develop 3 scenarios: price competition, product mix shift, and market geographic pivot. Present options to senior leadership.",
+    source_urls:['https://www.woodmarkets.com/category/mdf-particleboard','https://www.csil.it/report-mdf','https://www.foresteconomics.com/publications']
+  }
+];
+
+const BRIEFS={
+  'All':"Today's briefing carries <strong>5 high-priority alerts</strong> requiring immediate leadership attention. The dominant theme is <strong>rupiah weakness and USD cost pressure</strong> affecting all three group companies simultaneously. Hakarindo faces a critical double-squeeze: a new government export tax on waste paper tightens OCC supply while IDR weakness makes any USD-priced alternatives more expensive. Bank Indonesia rate signals add financing cost risk just as Hakarindo needs EBITDA recovery. Tjipta Group faces export headwinds from ASEAN tariff changes and Chinese competition. Treasury management and OCC procurement strategy are the two most urgent action items today.",
+  'Paper & Packaging':"<strong>Hakarindo is the most exposed group company today.</strong> Three concurrent pressures are converging: domestic OCC supply constraints from collection infrastructure limitations, elevated global corrugated prices with limited customer price pass-through ability, and IDR weakness increasing USD input costs. The new export tax on waste paper is the most actionable item — procurement and legal teams should review the regulation text immediately and assess forward contract options before prices move further.",
+  'Wood & Timber':"<strong>Tjipta Group faces a structurally challenging export environment.</strong> Chinese MDF oversupply is creating sustained pricing pressure in key ASEAN export markets, while new tariff barriers add distribution costs. The combination suggests Tjipta needs a strategic product mix review — moving up the value curve towards specialty MDF and moisture-resistant products where Chinese competition is weaker. Domestic Indonesian market development also offers a path to reduce export dependency.",
+  'Indonesia Economy':"<strong>The macro environment is cautious but not alarming.</strong> Rupiah weakness at USD/IDR 16,420 is the primary operational concern — it affects all three group companies' USD-denominated input costs. Bank Indonesia rate signals are mixed, creating uncertainty on financing costs. The current account deficit adds structural pressure to the Rupiah. Group treasury should run a comprehensive currency and interest rate exposure review this week.",
+  'Indonesia Finance & Banking':"<strong>Two key banking themes today.</strong> First, banks are tightening commodity sector lending standards — proactive engagement with relationship banks before formal credit reviews is the right response. Second, IDR weakness means USD revenue at R6B provides a valuable natural hedge against cost pressures at Hakarindo and Tjipta. Group CFO should quantify and communicate this natural hedge in banking conversations to strengthen the group's credit narrative.",
+  'Southeast Asia Trade':"<strong>Trade policy is moving against the group on two fronts.</strong> The new export tax on waste paper directly raises Hakarindo's input costs. ASEAN tariff changes hurt Tjipta's export competitiveness. Both require immediate operational response: OCC procurement strategy review at Hakarindo, and export market tariff impact assessment at Tjipta. Freight rate softening provides a minor offset but does not compensate for the regulatory headwinds."
+};
+
+let cat='All',urg='All';
+const todayStr=new Date().toISOString().slice(0,10);
+let readSet=new Set(JSON.parse(localStorage.getItem('tjipta_read')||'[]'));
+
+function norm(u){if(!u)return'Watch';if(u==='High'||u==='HIGH')return'HIGH';if(u==='Medium')return'Medium';return'Watch';}
+
+function initCounts(){
+  const cats={'Paper & Packaging':0,'Wood & Timber':0,'Indonesia Economy':0,'Indonesia Finance & Banking':0,'Southeast Asia Trade':0};
+  DATA.forEach(d=>{if(cats[d.cat]!==undefined)cats[d.cat]++;});
+  document.getElementById('nc-Paper').textContent=cats['Paper & Packaging'];
+  document.getElementById('nc-Wood').textContent=cats['Wood & Timber'];
+  document.getElementById('nc-Economy').textContent=cats['Indonesia Economy'];
+  document.getElementById('nc-Finance').textContent=cats['Indonesia Finance & Banking'];
+  document.getElementById('nc-Trade').textContent=cats['Southeast Asia Trade'];
+}
+
+// pillLabel kept for detail page only
+function pillLabel(un){
+  if(un==='HIGH') return 'Priority';
+  if(un==='Medium') return 'On Watch';
+  return 'Monitoring';
+}
+
+let mode='intelligence'; // 'intelligence' | 'trending'
+
+function render(){
+  const feed=document.getElementById('feed');
+  let f=DATA.filter(d=>{
+    const cm=d.cat===cat;
+    const un=norm(d.u);
+    const um=urg==='All'||un===urg;
+    return cm&&um;
+  });
+  f.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  document.getElementById('feed-count').textContent=f.length+' item'+(f.length!==1?'s':'');
+  document.getElementById('feed-label').textContent=cat;
+  document.getElementById('brief-text').innerHTML=BRIEFS[cat]||BRIEFS['All'];
+  if(!f.length){feed.innerHTML='<div class="empty-state">'+t('emptyNoMatch')+'</div>';return;}
+  let html='';
+  f.forEach(item=>{
+    const isNew=item.date===todayStr;
+    const isRead=readSet.has(item.id);
+    html+=`<div class="story-card${isRead?' card-read':''}" onclick="openDetail(${item.id})">
+      <div class="card-main">
+        <div class="card-meta">
+          <span class="card-cat">${item.cat}</span>
+          <span class="card-sep">·</span>
+          <span class="card-date">${item.date}</span>
+          ${isNew?`<span class="card-new">${t('badgeNew')}</span>`:''}
+        </div>
+        <div class="card-headline">${item.h}</div>
+        <div class="card-summary">${item.preview}</div>
+      </div>
+      <div class="card-arrow">›</div>
+    </div>`;
+  });
+  feed.innerHTML=html;
+}
+
+function setCat(c){
+  mode='intelligence';
+  cat=c;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  const map={'Paper & Packaging':'Paper','Wood & Timber':'Wood','Indonesia Economy':'Economy','Indonesia Finance & Banking':'Finance','Southeast Asia Trade':'Trade'};
+  const el=document.getElementById('n-'+(map[c]||c));
+  if(el)el.classList.add('on');
+  // Show editors brief
+  document.querySelector('.editors-brief').style.display='';
+  render();
+}
+
+// ── TRENDING NEWS ──
+function setTrending(type){
+  const catName=type==='indonesia'?'Indonesia Today':'Global Today';
+  // Hide editors brief for trending (no BRIEFS entry)
+  document.querySelector('.editors-brief').style.display='none';
+  // Manually set active tab
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  const btn=document.getElementById(type==='indonesia'?'n-Indonesia':'n-Global');
+  if(btn)btn.classList.add('on');
+  cat=catName;
+  const feed=document.getElementById('feed');
+  const label=document.getElementById('feed-label');
+  const countEl=document.getElementById('feed-count');
+  let f=DATA.filter(d=>d.cat===catName).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  label.textContent=catName;
+  countEl.textContent=f.length+' item'+(f.length!==1?'s':'');
+  if(!f.length){
+    feed.innerHTML='<div class="empty-state">'+t('emptyNoData')+'</div>';
+    return;
+  }
+  let html='';
+  f.forEach(item=>{
+    const isNew2=item.date===todayStr;
+    const isRead2=readSet.has(item.id);
+    html+=`<div class="story-card${isRead2?' card-read':''}" onclick="openDetail(${item.id})">
+      <div class="card-main">
+        <div class="card-meta">
+          <span class="card-cat">${item.cat}</span>
+          <span class="card-sep">·</span>
+          <span class="card-date">${item.date}</span>
+          ${isNew2?`<span class="card-new">${t('badgeNew')}</span>`:''}
+        </div>
+        <div class="card-headline">${item.h}</div>
+        <div class="card-summary">${item.preview}</div>
+      </div>
+      <div class="card-arrow">›</div>
+    </div>`;
+  });
+  feed.innerHTML=html;
+}
+
+function openDetail(id){
+  const item=DATA.find(d=>d.id===id);
+  if(!item)return;
+  // Mark as read
+  readSet.add(id);
+  localStorage.setItem('tjipta_read',JSON.stringify([...readSet]));
+  // Grey out the card immediately without full re-render
+  document.querySelectorAll(`[onclick="openDetail(${id})"]`).forEach(el=>el.classList.add('card-read'));
+  const isTrending=item.cat==='Indonesia Today'||item.cat==='Global Today';
+  const un=norm(item.u);
+  const pillClass=un==='HIGH'?'d-pill-high':un==='Medium'?'d-pill-med':'d-pill-watch';
+  const score=item.severity_score||5;
+  const scoreClass=score>=7?'s-high':score>=4?'s-med':'s-watch';
+  const paras=(item.explanation||'').split('\n\n').map(p=>`<p>${p}</p>`).join('');
+  const sourcesHtml=(item.source_urls||[]).map((url,i)=>
+    `<a class="d-source-link" href="${url}" target="_blank" rel="noopener"><span class="d-source-num">[${i+1}]</span><span class="d-source-url">${url}</span></a>`
+  ).join('');
+  document.getElementById('detail-body').innerHTML=`
+    <div class="d-eyebrow">
+      <span class="d-urgency-pill ${pillClass}">${pillLabel(un)}</span>
+      <span class="d-divider">·</span>
+      <span class="d-cat">${item.cat}</span>
+      <span class="d-divider">·</span>
+      <span class="d-date">${item.date}</span>
+    </div>
+    <h1 class="d-headline">${item.h}</h1>
+    <div class="d-rule"></div>
+
+    <div class="d-section-label">${t('secWhatsHappening')}</div>
+    <div class="d-explanation">${paras}</div>
+
+    <div class="d-section-label">${t('secSeverity')}</div>
+    <div class="d-severity-row">
+      <div class="d-score ${scoreClass}">${score}<span class="d-score-denom">/10</span></div>
+      <div>
+        <div class="d-score-label">${t('secScoreLabel')}</div>
+        <div class="d-score-reason">${item.severity_reason||''}</div>
+      </div>
+    </div>
+
+    ${isTrending?'':`
+    <div class="d-section-label">${t('secImpact')}</div>
+    <div class="d-company-grid">
+      <div class="d-company"><div class="d-company-name">Hakarindo / Deli Corp</div><div class="d-company-text">${item.hakarindo_impact||''}</div></div>
+      <div class="d-company"><div class="d-company-name">Tjipta Group</div><div class="d-company-text">${item.tjipta_impact||''}</div></div>
+      <div class="d-company"><div class="d-company-name">R6B Group</div><div class="d-company-text">${item.r6b_impact||''}</div></div>
+    </div>
+
+    <div class="d-section-label">${t('secAction')}</div>
+    <div class="d-action"><div class="d-action-label">${t('secActionLabel')}</div><div class="d-action-text">${item.action||''}</div></div>
+    `}
+
+    <div class="d-section-label">${t('secSources')}</div>
+    <div class="d-sources">${sourcesHtml||`<span style="color:var(--ink-4);font-size:13px">${t('noSources')}</span>`}</div>
+    <div style="height:60px"></div>
+  `;
+  document.getElementById('detail-page').classList.add('open');
+  document.getElementById('detail-page').scrollTop=0;
+}
+
+function closeDetail(){
+  document.getElementById('detail-page').classList.remove('open');
+}
+
+function openCommodities(){
+  document.getElementById('commodity-page').classList.add('open');
+  document.getElementById('commodity-page').scrollTop=0;
+  // Populate live price mirrors from ticker values
+  const usdEl=document.getElementById('tick-usdidr');
+  if(usdEl&&usdEl.textContent!=='—') document.getElementById('c-usdidr').textContent=usdEl.textContent+' IDR';
+  const goldEl=document.getElementById('tick-gold');
+  if(goldEl&&goldEl.textContent!=='—') document.getElementById('c-gold').textContent=goldEl.textContent;
+  const brentEl=document.getElementById('tick-brent');
+  if(brentEl&&brentEl.textContent!=='—') document.getElementById('c-brent').textContent=brentEl.textContent;
+}
+
+function closeCommodities(){
+  document.getElementById('commodity-page').classList.remove('open');
+}
+
+(async()=>{
+  // Primary: local data.js (written by market_briefing.py — no CORS issues)
+  if(window.BRIEFING_DATA&&window.BRIEFING_DATA.length){
+    // data.js always contains only the latest run — just strip any fallback placeholders
+    DATA=window.BRIEFING_DATA
+      .filter(d=>!d.h.startsWith('No analysis available'));
+  } else {
+    // Fallback: try Google Sheet (works when served from a proper web server)
+    const live=await loadSheetData();
+    if(live&&live.length){DATA=live;}
+  }
+  initCounts();
+  setCat('Paper & Packaging');
+  applyLang();
+})();
+
+</script>
+</body>
+</html>
