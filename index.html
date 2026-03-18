@@ -202,6 +202,66 @@ html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sa
 .comm-note{font-size:12px;color:var(--ink-3);margin-top:8px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-light);border-radius:4px;line-height:1.6}
 .lang-toggle{margin-left:auto;padding:5px 12px;border:1px solid var(--border);border-radius:4px;background:var(--surface);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-3);cursor:pointer;letter-spacing:.5px;transition:all .15s;flex-shrink:0}
 .lang-toggle:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:768px){
+  /* Masthead */
+  .masthead-top{padding:12px 16px;gap:10px}
+  .brand-name{font-size:18px}
+  .masthead-right{display:none} /* hide date on small screens */
+
+  /* Ticker — already scrolls horizontally, just tighten padding */
+  .tick{padding:6px 12px}
+
+  /* Editors brief — stack vertically */
+  .editors-brief{padding:12px 16px;flex-direction:column;gap:6px}
+  .brief-eyebrow{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:0}
+  .brief-text{padding-left:0;font-size:13.5px}
+
+  /* Category nav — tighten padding so more tabs fit */
+  .cat-nav{padding:0 12px}
+  .cat-btn{font-size:12px;margin-right:18px;padding:10px 0}
+  .lang-toggle{padding:4px 10px;font-size:11px}
+
+  /* Page layout — hide sidebar, feed goes full width */
+  .page-wrap{flex-direction:column}
+  .comm-sidebar{display:none}
+
+  /* Feed */
+  .feed-meta{padding:12px 16px}
+  #feed{padding:14px 16px;gap:10px}
+  .empty-state{padding:40px 16px}
+
+  /* Story cards */
+  .story-card{padding:14px 16px}
+  .card-headline{font-size:15px}
+  .card-summary{font-size:13px}
+
+  /* Detail page */
+  .detail-nav{padding:12px 16px}
+  .detail-brand{font-size:13px}
+  .detail-content{padding:24px 16px 60px}
+  .d-headline{font-size:22px;margin-bottom:18px}
+  .d-explanation{font-size:15px}
+  .d-company-grid{grid-template-columns:1fr} /* stack 3-col → 1-col */
+  .d-severity-row{flex-direction:column;gap:10px}
+  .d-score{font-size:36px;min-width:auto}
+
+  /* Commodity overlay */
+  .comm-content{padding:20px 16px 60px}
+  .comm-title{font-size:22px}
+  .comm-subtitle{font-size:13px;margin-bottom:24px}
+  /* Make tables horizontally scrollable */
+  .comm-section{overflow-x:auto}
+  .comm-table{min-width:480px}
+}
+
+@media(max-width:480px){
+  .brand-name{font-size:16px}
+  .cat-btn{font-size:11px;margin-right:14px}
+  .card-headline{font-size:14px}
+  .d-headline{font-size:19px}
+}
 </style>
 </head>
 <body>
@@ -1106,3 +1166,4 @@ function closeCommodities(){
 </script>
 </body>
 </html>
+
