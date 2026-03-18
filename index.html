@@ -203,64 +203,111 @@ html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sa
 .lang-toggle{margin-left:auto;padding:5px 12px;border:1px solid var(--border);border-radius:4px;background:var(--surface);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-3);cursor:pointer;letter-spacing:.5px;transition:all .15s;flex-shrink:0}
 .lang-toggle:hover{color:var(--ink);border-color:var(--ink-3)}
 
+/* ── MOBILE COMMODITY BUTTON (hidden on desktop) ── */
+.mob-comm-btn{display:none}
+
 /* ── MOBILE RESPONSIVE ── */
 @media(max-width:768px){
-  /* Masthead */
-  .masthead-top{padding:12px 16px;gap:10px}
-  .brand-name{font-size:18px}
-  .masthead-right{display:none} /* hide date on small screens */
 
-  /* Ticker — already scrolls horizontally, just tighten padding */
-  .tick{padding:6px 12px}
+  /* ── Masthead ── */
+  .masthead{box-shadow:0 1px 6px rgba(0,0,0,.06)}
+  .masthead-top{padding:13px 18px;gap:0}
+  .brand-name{font-size:19px}
+  .brand-sub{font-size:10.5px}
+  /* Hide desktop date, show commodity shortcut */
+  .masthead-date,.masthead-edition{display:none}
+  .masthead-right{display:flex;flex-direction:row;align-items:center}
+  .mob-comm-btn{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:6px 12px;
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
+    color:var(--blue);cursor:pointer;white-space:nowrap;
+    -webkit-tap-highlight-color:transparent;
+  }
 
-  /* Editors brief — stack vertically */
-  .editors-brief{padding:12px 16px;flex-direction:column;gap:6px}
-  .brief-eyebrow{padding-right:0;border-right:none;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:0}
-  .brief-text{padding-left:0;font-size:13.5px}
+  /* ── Ticker ── */
+  .tick{padding:7px 14px}
+  .tick-label{font-size:10px}
 
-  /* Category nav — tighten padding so more tabs fit */
-  .cat-nav{padding:0 12px}
-  .cat-btn{font-size:12px;margin-right:18px;padding:10px 0}
-  .lang-toggle{padding:4px 10px;font-size:11px}
+  /* ── Editors brief ── */
+  .editors-brief{padding:13px 18px;flex-direction:column;gap:0}
+  .brief-eyebrow{
+    padding-right:0;border-right:none;
+    padding-bottom:8px;margin-bottom:8px;
+    border-bottom:1px solid var(--border-light);
+    font-size:10px;letter-spacing:1.2px;
+  }
+  .brief-text{padding-left:0;font-size:13.5px;line-height:1.6}
 
-  /* Page layout — hide sidebar, feed goes full width */
+  /* ── Category nav — lock to horizontal-only scroll ── */
+  .cat-nav{
+    padding:0 18px;
+    overflow-x:auto;
+    overflow-y:hidden;                    /* prevent diagonal drift */
+    -webkit-overflow-scrolling:touch;     /* momentum on iOS */
+    scroll-behavior:smooth;
+    overscroll-behavior-x:contain;       /* stop page scroll stealing */
+  }
+  .cat-btn{
+    font-size:13px;
+    font-weight:500;
+    padding:13px 0;
+    margin-right:22px;
+    min-height:44px;  /* comfortable tap target */
+    touch-action:pan-x; /* horizontal swipe only */
+  }
+  .lang-toggle{
+    padding:5px 11px;font-size:11px;
+    min-height:44px;border-radius:6px;
+  }
+
+  /* ── Page layout ── */
   .page-wrap{flex-direction:column}
   .comm-sidebar{display:none}
 
-  /* Feed */
-  .feed-meta{padding:12px 16px}
-  #feed{padding:14px 16px;gap:10px}
-  .empty-state{padding:40px 16px}
+  /* ── Feed ── */
+  .feed-meta{padding:13px 18px}
+  #feed{padding:14px 18px 24px;gap:11px}
+  .empty-state{padding:48px 18px;font-size:14px}
 
-  /* Story cards */
-  .story-card{padding:14px 16px}
-  .card-headline{font-size:15px}
-  .card-summary{font-size:13px}
+  /* ── Story cards ── */
+  .story-card{
+    padding:16px 16px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05);
+    border-left-width:3.5px;
+  }
+  .card-headline{font-size:15.5px;line-height:1.42}
+  .card-summary{font-size:13px;line-height:1.55}
+  .card-arrow{padding-top:14px;font-size:18px}
 
-  /* Detail page */
-  .detail-nav{padding:12px 16px}
+  /* ── Detail page ── */
+  .detail-nav{padding:12px 18px}
   .detail-brand{font-size:13px}
-  .detail-content{padding:24px 16px 60px}
-  .d-headline{font-size:22px;margin-bottom:18px}
-  .d-explanation{font-size:15px}
-  .d-company-grid{grid-template-columns:1fr} /* stack 3-col → 1-col */
+  .detail-back{font-size:12px;padding:7px 12px}
+  .detail-content{padding:26px 18px 72px}
+  .d-headline{font-size:23px;line-height:1.3;margin-bottom:18px}
+  .d-explanation{font-size:15px;line-height:1.72}
+  .d-company-grid{grid-template-columns:1fr}
   .d-severity-row{flex-direction:column;gap:10px}
-  .d-score{font-size:36px;min-width:auto}
+  .d-score{font-size:40px;min-width:auto}
+  .d-section-label{margin-top:26px}
 
-  /* Commodity overlay */
-  .comm-content{padding:20px 16px 60px}
+  /* ── Commodity overlay ── */
+  .comm-content{padding:22px 18px 72px}
   .comm-title{font-size:22px}
   .comm-subtitle{font-size:13px;margin-bottom:24px}
-  /* Make tables horizontally scrollable */
-  .comm-section{overflow-x:auto}
-  .comm-table{min-width:480px}
+  .comm-section{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .comm-table{min-width:500px}
 }
 
-@media(max-width:480px){
-  .brand-name{font-size:16px}
-  .cat-btn{font-size:11px;margin-right:14px}
-  .card-headline{font-size:14px}
-  .d-headline{font-size:19px}
+@media(max-width:420px){
+  .brand-name{font-size:17px}
+  .mob-comm-btn{font-size:11px;padding:5px 10px}
+  .cat-btn{font-size:12px;margin-right:18px}
+  .card-headline{font-size:15px}
+  .d-headline{font-size:20px}
 }
 </style>
 </head>
@@ -280,6 +327,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sa
         <div class="masthead-edition">
           <span id="date-range"></span>
         </div>
+        <button class="mob-comm-btn" onclick="openCommodities()">Commodity Prices ›</button>
       </div>
     </div>
     <div class="ticker">
