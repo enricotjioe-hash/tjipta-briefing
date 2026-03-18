@@ -2,8 +2,6 @@
 credentials.json
 token.pickle
 briefing_log.txt
-tools/
-workflows/
 CLAUDE.md
 .tmp/
 
