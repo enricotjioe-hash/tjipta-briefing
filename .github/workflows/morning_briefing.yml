@@ -14,6 +14,9 @@ permissions:
 jobs:
   briefing:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
 
     steps:
       # ── 1. Checkout ──────────────────────────────────────────────────────────
@@ -42,35 +45,37 @@ jobs:
             aiohttp
 
       # ── 4. Google credentials ─────────────────────────────────────────────────
-      # Both files are base64-encoded and stored as repository secrets.
-      # auth_google.py looks for these in the current working directory (repo root).
       - name: Restore Google credentials
         env:
           GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
           GOOGLE_TOKEN_PICKLE: ${{ secrets.GOOGLE_TOKEN_PICKLE }}
         run: |
           echo "$GOOGLE_CREDENTIALS_JSON" | base64 --decode > credentials.json
-          echo "$GOOGLE_TOKEN_PICKLE"     | base64 --decode > token.pickle
+          echo "$GOOGLE_TOKEN_PICKLE" | base64 --decode > token.pickle
 
-      # ── 5. Run the briefing script ────────────────────────────────────────────
-      # GITHUB_TOKEN and GITHUB_REPO are intentionally NOT passed here so that
-      # push_data_js_to_github() inside the script skips silently.
-      # The workflow's git step below handles the commit + push instead.
+      # ── 5. Debug paths ────────────────────────────────────────────────────────
+      - name: Debug paths
+        run: |
+          pwd
+          ls -la
+          ls -la tools
+          find . -maxdepth 3 -type f | sort
+
+      # ── 6. Run the briefing script ────────────────────────────────────────────
       - name: Run morning briefing
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          NEWS_API_KEY:       ${{ secrets.NEWS_API_KEY }}
-          GOOGLE_SHEET_ID:    ${{ secrets.GOOGLE_SHEET_ID }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: |
           python3 tools/market_briefing.py
 
-      # ── 6. Commit and push data.js ────────────────────────────────────────────
+      # ── 7. Commit and push data.js ────────────────────────────────────────────
       - name: Commit updated data.js
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.js
-          # Only commit if data.js actually changed; exit 0 either way
           git diff --cached --quiet \
             && echo "data.js unchanged — nothing to commit." \
             || git commit -m "chore: update briefing data $(date -u +%Y-%m-%d)"
