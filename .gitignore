@@ -6,3 +6,13 @@ tools/
 workflows/
 CLAUDE.md
 .tmp/
+
+
+.DS_Store
+.claude-flow/
+.claude/
+.mcp.json
+.swarm/
+token.pickle
+credentials.json
+.env
